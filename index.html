@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montero Studio | Espacio Estelar</title>
+    <!-- Fuentes Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- CANVAS DE FONDO (PARTÍCULAS ESTELARES) -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="main-wrapper">
+
+        <!-- HEADER / TÍTULO PRINCIPAL -->
+        <header class="site-header fade-in-element">
+            <span class="subtitle-brand">Montero Studio</span>
+            <h1>Alineación Estelar</h1>
+            <p>Un espacio creado para la memoria, la música y el tiempo compartido.</p>
+        </header>
+
+        <!-- SECCIÓN 1: CONTADOR DE TIEMPO (Inicio exacto: 24/07/2026 a la 1:00 PM) -->
+        <section class="time-section fade-in-element">
+            <h2>Tiempo Transcurrido</h2>
+            <div class="countdown-container">
+                <div class="time-box">
+                    <span id="years">00</span>
+                    <span class="time-label">Años</span>
+                </div>
+                <div class="time-box">
+                    <span id="months">00</span>
+                    <span class="time-label">Meses</span>
+                </div>
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <span class="time-label">Días</span>
+                </div>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <span class="time-label">Horas</span>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <span class="time-label">Minutos</span>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <span class="time-label">Segundos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: GALERÍA -->
+        <section class="gallery-section fade-in-element">
+            <div class="section-header-flex">
+                <h2>Galería de Momentos</h2>
+            </div>
+
+            <div class="carrusel-wrapper">
+                <button class="car-nav-btn car-prev" id="carPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="carrusel-contenedor" id="carruselContenedor">
+                    <div class="carrusel-track" id="carruselTrack">
+
+                        <!-- ==========================================
+                             ZONA DE FOTOS: Duplica un bloque <div class="gallery-item">...</div> 
+                             por cada foto nueva que quieras agregar en el futuro.
+                             ========================================== -->
+
+                        <!-- FOTO 1 -->
+                        <div class="gallery-item" data-url="https://picsum.photos/id/1015/800/600"
+                            data-desc="Un atardecer en el horizonte lejano.">
+                            <img src="https://picsum.photos/id/1015/300/300" alt="Atardecer en el horizonte">
+                        </div>
+
+                        <!-- FOTO 2 -->
+                        <div class="gallery-item" data-url="https://picsum.photos/id/1041/800/600"
+                            data-desc="El reflejo de las estrellas en aguas tranquilas.">
+                            <img src="https://picsum.photos/id/1041/300/300" alt="Reflejo de estrellas">
+                        </div>
+
+                        <!-- FOTO 3 -->
+                        <div class="gallery-item" data-url="https://picsum.photos/id/10/800/600"
+                            data-desc="Un bosque bajo la luz de la mañana.">
+                            <img src="https://picsum.photos/id/10/300/300" alt="Bosque por la mañana">
+                        </div>
+
+                        <!-- FOTO 4 -->
+                        <div class="gallery-item" data-url="https://picsum.photos/id/17/800/600"
+                            data-desc="Caminos que se cruzan en la inmensidad.">
+                            <img src="https://picsum.photos/id/17/300/300" alt="Caminos cruzados">
+                        </div>
+
+                    </div>
+                </div>
+                <button class="car-nav-btn car-next" id="carNext"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+
+        <!-- SECCIÓN 3: REPRODUCTOR DE MÚSICA (YOUTUBE MUSIC PLAYLIST) -->
+        <section class="music-section fade-in-element">
+            <div class="section-header-flex">
+                <h2>Nuestro Playlist</h2>
+            </div>
+
+            <!-- Tarjeta del Reproductor Estelar -->
+            <div class="audio-player-card">
+                <div class="track-meta">
+                    <div class="vinyl-icon-spin" id="vinylDisc"><i class="fa-solid fa-compact-disc"></i></div>
+                    <div class="track-info-text">
+                        <span id="trackTitle" class="track-title">Cargando Playlist...</span>
+                        <span id="trackArtist" class="track-artist">Montero Studio</span>
+                    </div>
+                </div>
+
+                <div class="player-controls-group">
+                    <div class="control-buttons">
+                        <button id="shuffleBtn" class="sub-ctrl-btn" title="Aleatorio"><i
+                                class="fa-solid fa-shuffle"></i></button>
+                        <button id="prevBtn" class="main-ctrl-btn"><i class="fa-solid fa-backward-step"></i></button>
+                        <button id="playBtn" class="play-pause-btn"><i id="playIcon"
+                                class="fa-solid fa-play"></i></button>
+                        <button id="nextBtn" class="main-ctrl-btn"><i class="fa-solid fa-forward-step"></i></button>
+                        <button id="loopBtn" class="sub-ctrl-btn" title="Repetir"><i
+                                class="fa-solid fa-repeat"></i></button>
+                    </div>
+
+                    <div class="progress-container">
+                        <span id="currentTime" class="time-indicator">0:00</span>
+                        <input type="range" id="progressBar" value="0" min="0" max="100" step="0.1">
+                        <span id="durationTime" class="time-indicator">0:00</span>
+                    </div>
+                </div>
+
+                <!-- Barra inferior: Botón de lista a la izquierda y Volumen a la derecha -->
+                <div class="player-bottom-bar">
+                    <button id="togglePlaylistBtn" class="sub-ctrl-btn playlist-toggle-inline"
+                        title="Ver lista de reproducción">
+                        <i class="fa-solid fa-list-ul"></i> Lista
+                    </button>
+
+                    <div class="volume-container">
+                        <button id="muteBtn" class="sub-ctrl-btn"><i id="volumeIcon"
+                                class="fa-solid fa-volume-high"></i></button>
+                        <input type="range" id="volumeBar" value="1" min="0" max="1" step="0.05">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de canciones desplegable de la playlist -->
+            <div id="playlistContainer" class="playlist-drawer">
+                <div class="playlist-header"><span>Pistas de la Playlist</span></div>
+                <div id="playlistTracksList" class="playlist-tracks-list">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Contenedor oculto requerido por la API de YouTube -->
+            <div id="youtube-hidden-player" style="display:none;"></div>
+        </section>
+
+
+        <!-- SECCIÓN 4: NOTAS COMPARTIDAS -->
+        <section class="astro-section fade-in-element">
+            <h2>Notas Compartidas</h2>
+            <p class="section-desc">Un espacio íntimo donde plasmamos nuestros pensamientos y aspectos guardados.</p>
+
+            <div class="astro-grid">
+                <div class="astro-card">
+                    <h3><i class="fa-solid fa-pen-nib"></i>Montero</h3>
+                    <div class="astro-static-content">
+                        <p>• Primer aspecto o nota de el.<br>• Segundo aspecto importante.</p>
+                    </div>
+                </div>
+
+                <div class="astro-card">
+                    <h3><i class="fa-solid fa-feather"></i>Quintero</h3>
+                    <div class="astro-static-content">
+                        <p>• Configuración armónica estelar.<br>• Notas y consideraciones técnicas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: CARTA / MENSAJE ESPECIAL -->
+        <section class="astro-section fade-in-element">
+            <div class="astro-card letter-card-box">
+                <h3><i class="fa-solid fa-heart"></i> Para Nosotros Dos</h3>
+
+                <div class="letter-content-body">
+                    <p>Desde el cataclismo exacto en que nuestras órbitas colisionaron a velocidad lumínica, los
+                        agujeros negros tuvieron que abrirnos paso y las leyes de la física decidieron jubilarse por
+                        vergüenza ajena.</p>
+
+                    <p>Este refugio estelar es el único búnker capaz de contener semejante tormenta cósmica: la fusión
+                        inescrupulosa entre tu caos intergaláctico y mi absoluta precisión milimétrica.</p>
+
+                    <p>Cada segundo a tu lado es un Big Bang en miniatura, un portal sagrado y radioactivo grabado a
+                        fuego en la memoria de las constelaciones que ya nos miran con envidia. El tiempo, finalmente,
+                        se rindió y nos pertenece... o al menos hasta que rompamos el universo otra vez.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="site-header fade-in-element" style="margin-top: 40px; margin-bottom: 0;">
+            <p>&copy; 2026 Montero Studio. Todos los derechos reservados.</p>
+        </footer>
+
+    </div>
+
+    <!-- ZOOM DE FOTO -->
+    <div class="photo-zoom-overlay" id="photoZoomOverlay">
+        <div class="photo-zoom-card">
+            <button class="photo-zoom-close" id="closeZoom"><i class="fa-solid fa-xmark"></i></button>
+            <img id="zoomImgElement" src="" alt="Zoom">
+            <span id="zoomDescElement" class="photo-zoom-desc"></span>
+        </div>
+    </div>
+
+    <!-- Script principal -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
